@@ -18,15 +18,14 @@ const Auth = () => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    let data;
     if (newAccount) {
-      data = await authService
+      await authService
         .createUserWithEmailAndPassword(email, password)
         .catch((error) => {
           setError(error.message);
         });
     } else {
-      data = await authService
+      await authService
         .signInWithEmailAndPassword(email, password)
         .catch((error) => {
           setError(error.message);
