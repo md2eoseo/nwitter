@@ -40,7 +40,10 @@ const Nweet = ({ nweet, isOwner }) => {
   return (
     <div>
       {!editing ? (
-        <h4>{nweet.text}</h4>
+        <>
+          <span>{nweet.text}</span>
+          {nweet.updatedAt && <span>-edited</span>}
+        </>
       ) : (
         <form onSubmit={onEdit}>
           <input
