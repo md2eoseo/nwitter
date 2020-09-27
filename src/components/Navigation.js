@@ -2,7 +2,7 @@ import { authService } from "fbase";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = ({ userObj }) => {
   const onLogout = () => {
     authService.signOut();
   };
@@ -16,7 +16,7 @@ const Navigation = () => {
         </li>
         <li>
           <NavLink exact to="/profile">
-            Profile
+            {userObj.displayName}'s profile
           </NavLink>
         </li>
         <button onClick={onLogout}>Logout</button>
