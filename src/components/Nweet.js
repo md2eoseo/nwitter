@@ -1,4 +1,5 @@
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
+import { storage } from "firebase";
 import React, { useState } from "react";
 
 const Nweet = ({ nweet, isOwner }) => {
@@ -34,6 +35,7 @@ const Nweet = ({ nweet, isOwner }) => {
   const onDelete = async () => {
     const ok = window.confirm("Are you sure to delete Nweet?");
     if (ok) {
+      await storageService.refFromURL(nweet.attachmentUrl).delete();
       await dbService.doc(`nweets/${nweet.id}`).delete();
     }
   };
