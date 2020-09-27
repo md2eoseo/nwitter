@@ -40,10 +40,17 @@ const Nweet = ({ nweet, isOwner }) => {
   return (
     <div>
       {!editing ? (
-        <>
+        <div>
+          {nweet.attachmentUrl && (
+            <img
+              src={nweet.attachmentUrl}
+              alt="nweet.attachmentUrl"
+              height="100px"
+            />
+          )}
           <span>{nweet.text}</span>
           {nweet.updatedAt && <span>-edited</span>}
-        </>
+        </div>
       ) : (
         <form onSubmit={onEdit}>
           <input
