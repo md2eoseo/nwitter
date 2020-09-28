@@ -16,7 +16,7 @@ const Navigation = ({ userObj }) => {
         </li>
         <li>
           <NavLink exact to="/profile">
-            {userObj.displayName}'s profile
+            {userObj && userObj.displayName}'s profile
           </NavLink>
         </li>
         <button onClick={onLogout}>Logout</button>
