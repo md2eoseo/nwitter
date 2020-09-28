@@ -1,6 +1,9 @@
 import { authService } from "fbase";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = ({ userObj }) => {
   const onLogout = () => {
@@ -8,18 +11,25 @@ const Navigation = ({ userObj }) => {
   };
   return (
     <nav>
-      <ul>
+      <ul className="navigator">
         <li>
-          <NavLink exact to="/">
-            Home
+          <NavLink className="nav_home" exact to="/">
+            <FontAwesomeIcon icon={faTwitter} color={"#04AAFF"} size="2x" />
           </NavLink>
         </li>
         <li>
-          <NavLink exact to="/profile">
-            {userObj && userObj.displayName}'s profile
+          <NavLink className="nav_profile" exact to="/profile">
+            <FontAwesomeIcon icon={faUser} color={"#04AAFF"} size="2x" />
+            <span className="nav_profile_span">
+              {userObj ? `${userObj.displayName}` : "Profile"}
+            </span>
           </NavLink>
         </li>
-        <button onClick={onLogout}>Logout</button>
+        <li>
+          <span className="formBtn cancelBtn logOut" onClick={onLogout}>
+            Logout
+          </span>
+        </li>
       </ul>
     </nav>
   );

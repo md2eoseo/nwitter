@@ -37,15 +37,24 @@ const Profile = ({ userObj, refreshUser }) => {
     }
   };
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    <div className="container">
+      <form onSubmit={onSubmit} className="profileForm">
         <input
+          className="formInput"
           onChange={onChange}
           type="text"
           placeholder="Display name"
           value={newDisplayName}
+          autoFocus
         />
-        <input type="submit" value="Update Profile" />
+        <input
+          className="formBtn"
+          style={{
+            marginTop: 10,
+          }}
+          type="submit"
+          value="Update Profile"
+        />
       </form>
       <div>
         {myNweets.length > 0
@@ -58,7 +67,7 @@ const Profile = ({ userObj, refreshUser }) => {
             ))
           : "There's no Nweet..."}
       </div>
-    </>
+    </div>
   );
 };
 

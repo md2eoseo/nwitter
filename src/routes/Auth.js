@@ -1,6 +1,12 @@
 import AuthForm from "components/AuthForm";
 import { authService, firebaseInstance } from "fbase";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTwitter,
+  faGoogle,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Auth = () => {
   const [error, setError] = useState("");
@@ -23,15 +29,21 @@ const Auth = () => {
     });
   };
   return (
-    <div>
+    <div className="authContainer">
+      <FontAwesomeIcon
+        icon={faTwitter}
+        color={"#04AAFF"}
+        size="3x"
+        style={{ marginBottom: 30 }}
+      />
       <AuthForm error={error} setError={setError} />
-      {error}
-      <div>
-        <button onClick={onSocialLogin} name="google">
-          Continue with Google
+      {error && <span className="authError">{error}</span>}
+      <div className="authBtns">
+        <button onClick={onSocialLogin} name="google" className="authBtn">
+          Continue with Google <FontAwesomeIcon icon={faGoogle} />
         </button>
-        <button onClick={onSocialLogin} name="github">
-          Continue with Github
+        <button onClick={onSocialLogin} name="github" className="authBtn">
+          Continue with Github <FontAwesomeIcon icon={faGithub} />
         </button>
       </div>
     </div>

@@ -31,9 +31,14 @@ const AuthForm = ({ error, setError }) => {
         });
     }
   };
+  const toggleAuth = () => {
+    setNewAccount(!newAccount);
+    setError("");
+  };
   return (
-    <form onSubmit={onSubmit}>
+    <form className="container" onSubmit={onSubmit}>
       <input
+        className="authInput"
         name="email"
         type="text"
         placeholder="Email"
@@ -42,6 +47,7 @@ const AuthForm = ({ error, setError }) => {
         onChange={onChange}
       />
       <input
+        className="authInput"
         name="password"
         type="password"
         placeholder="Pasword"
@@ -49,15 +55,14 @@ const AuthForm = ({ error, setError }) => {
         value={password}
         onChange={onChange}
       />
-      <input type="submit" value={newAccount ? "Sign up" : "Login"} />
-      <button
-        onClick={() => {
-          setNewAccount(!newAccount);
-          setError("");
-        }}
-      >
+      <input
+        className="authInput authSubmit"
+        type="submit"
+        value={newAccount ? "Sign up" : "Login"}
+      />
+      <span className="authSwitch" onClick={toggleAuth}>
         {newAccount ? "I have a account" : "I don't have a account"}
-      </button>
+      </span>
     </form>
   );
 };

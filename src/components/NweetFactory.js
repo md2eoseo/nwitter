@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const NweetFactory = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
@@ -57,21 +59,43 @@ const NweetFactory = ({ userObj }) => {
     setAttachment(null);
   };
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        value={nweet}
-        onChange={onChange}
-        placeholder="Nweet your thoughts..."
-        maxLength={120}
-      />
-      <input type="file" accept="image/*" onChange={onFileChange} />
+    <form className="factoryForm" onSubmit={onSubmit}>
+      <div className="factoryInput__container">
+        <input
+          className="factoryInput__input"
+          value={nweet}
+          onChange={onChange}
+          placeholder="Nweet your thoughts..."
+          maxLength={120}
+        />
+        <input
+          className="formFileInput"
+          id="attach-file"
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
+        />
+        <input value="&rarr;" className="factoryInput__arrow" type="submit" />
+      </div>
+      <label for="attach-file" className="factoryInput__label">
+        <span>Add photos</span>
+        <FontAwesomeIcon icon={faPlus} />
+      </label>
       {attachment && (
-        <div>
-          <img src={attachment} alt="attachment" height="100px" />
-          <button onClick={onClearAttachment}>Clear Photo</button>
+        <div className="factoryForm__attachment">
+          <img
+            src={attachment}
+            alt="attachment"
+            style={{
+              backgroundImage: attachment,
+            }}
+          />
+          <div className="factoryForm__clear" onClick={onClearAttachment}>
+            <span>Remove</span>
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
         </div>
       )}
-      <input type="submit" value="Nweet" />
     </form>
   );
 };

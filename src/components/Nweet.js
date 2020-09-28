@@ -1,5 +1,7 @@
 import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Nweet = ({ nweet, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -41,37 +43,41 @@ const Nweet = ({ nweet, isOwner }) => {
     }
   };
   return (
-    <div>
+    <div className="nweet">
       {!editing ? (
         <div>
           {nweet.attachmentUrl && (
-            <img
-              src={nweet.attachmentUrl}
-              alt="nweet.attachmentUrl"
-              height="100px"
-            />
+            <img src={nweet.attachmentUrl} alt="nweet.attachmentUrl" />
           )}
           <span>{nweet.text}</span>
           {nweet.updatedAt && <span>-edited</span>}
         </div>
       ) : (
-        <form onSubmit={onEdit}>
+        <form className="container nweetEdit" onSubmit={onEdit}>
           <input
+            className="formInput"
             placeholder="Edit your nweet..."
             value={newNweet}
             onChange={onChange}
             maxLength={120}
             required
-          ></input>
-          <input type="submit" value="edit" />
-          <button onClick={toggleEditing}>cancel</button>
+            autoFocus
+          />
+          <input className="formBtn" type="submit" value="edit" />
+          <button className="formBtn cancelBtn" onClick={toggleEditing}>
+            cancel
+          </button>
         </form>
       )}
       {isOwner && !editing && (
-        <>
-          <button onClick={onDelete}>delete</button>
-          <button onClick={toggleEditing}>edit</button>
-        </>
+        <div class="nweet__actions">
+          <span onClick={onDelete}>
+            <FontAwesomeIcon icon={faTrash} />
+          </span>
+          <span onClick={toggleEditing}>
+            <FontAwesomeIcon icon={faPencilAlt} />
+          </span>
+        </div>
       )}
     </div>
   );

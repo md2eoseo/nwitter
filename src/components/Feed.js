@@ -14,7 +14,7 @@ const Feed = ({ userObj }) => {
     });
   }, []);
   return (
-    <div>
+    <div className="feed">
       {nweets.map((nweet) => (
         <Nweet
           key={nweet.id}
